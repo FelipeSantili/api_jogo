@@ -47,11 +47,13 @@ class JogoDAO {
     }
 
     public function insert(Jogo $jogo) {
-        $sql = 'INSERT INTO jogos (nome, empresa, capaJogo) VALUES (:nome, :empresa, :capaJogo)';
+        $sql = 'INSERT INTO jogos (nome, empresa, anoLancamento, categoria, capaJogo) VALUES (:nome, :empresa, :anoLancamento, :categoria, :capaJogo)';
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue("nome", $jogo->getNome());
         $stmt->bindValue("empresa", $jogo->getEmpresa());
+        $stmt->bindValue("anoLancamento", $jogo->getAnoLancamento());
+        $stmt->bindValue("categoria", $jogo->getCategoria());
         $stmt->bindValue("capaJogo", $jogo->getCapaJogo());
         $stmt->execute();
 
@@ -61,11 +63,13 @@ class JogoDAO {
     }
 
     public function update(Jogo $jogo) {
-        $sql = 'UPDATE jogos SET nome = :nome, empresa = :empresa, capaJogo = :capaJogo WHERE id = :id';
+        $sql = 'UPDATE jogos SET nome = :nome, empresa = :empresa, anoLancamento = :anoLancamento, categoria = :categoria, capaJogo = :capaJogo WHERE id = :id';
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue("nome", $jogo->getNome());
         $stmt->bindValue("empresa", $jogo->getempresa());
+        $stmt->bindValue("anoLancamento", $jogo->getAnoLancamento());
+        $stmt->bindValue("categoria", $jogo->getCategoria());
         $stmt->bindValue("capaJogo", $jogo->getcapaJogo());
         $stmt->bindValue("id", $jogo->getId());
         $stmt->execute();

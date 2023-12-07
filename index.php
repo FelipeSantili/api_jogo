@@ -25,7 +25,7 @@ $app->addErrorMiddleware(true, true, true); //Retorna um erro do Framework caso 
 $app->get('/jogos', 'App\Controller\JogoController:listar');
 $app->get("/jogos/{id}", JogoController::class . ":buscarPorId");
 $app->post("/jogos", JogoController::class . ":inserir");
-$app->put("/jogos/{id}", JogoController::class . ":editarJogos");
+$app->put("/jogos/{id}", JogoController::class . ":editar");
 $app->delete("/jogos/{id}", JogoController::class . ":deletar");
 
 

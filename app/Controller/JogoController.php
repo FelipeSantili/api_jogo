@@ -103,6 +103,8 @@ class JogoController {
 
         $jogo->setNome($jsonData['nome'] ?? $jogo->getNome());
         $jogo->setEmpresa($jsonData['empresa'] ?? $jogo->getEmpresa());
+        $jogo->setAnoLancamento($jsonData['anoLancamento'] ?? $jogo->getAnoLancamento());
+        $jogo->setCategoria($jsonData['categoria'] ?? $jogo->getCategoriaName());
         $jogo->setCapaJogo($jsonData['capaJogo'] ?? $jogo->getCapaJogo());
     
 

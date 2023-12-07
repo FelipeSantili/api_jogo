@@ -9,12 +9,16 @@ class Jogo implements JsonSerializable {
     private ?int $id;
     private ?string $nome;
     private ?string $empresa;
+    private ?int $anoLancamento;
+    private ?string $categoria;
     private ?string $capaJogo;
 
     public function __construct() {
         $this->id = 0;
         $this->nome = null;
         $this->empresa = null;
+        $this->anoLancamento = 0;
+        $this->categoria = null;
         $this->capaJogo = null;
     }
 
@@ -23,6 +27,8 @@ class Jogo implements JsonSerializable {
             'id' => $this->id,
             'nome' => $this->nome,
             'empresa' => $this->empresa,
+            'anoLancamento' => $this->anoLancamento,
+            'categoria' => $this->getCategoriaName(),
             'capaJogo' => $this->capaJogo,
         ];
     }
@@ -87,6 +93,51 @@ class Jogo implements JsonSerializable {
         return $this;
     }
 
+     /**
+     * Get the value of anoLancamento
+     */ 
+    public function getAnoLancamento()
+    {
+        return $this->anoLancamento;
+    }
+
+    /**
+     * Set the value of anoLancamento
+     *
+     * @return  self
+     */ 
+    public function setAnoLancamento($anoLancamento)
+    {
+        $this->anoLancamento = $anoLancamento;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?string {
+        return $this->categoria;
+    }
+
+    public function getCategoriaName(): ?string {
+        if ($this->categoria == 'A')
+            return "Ação";
+        elseif ($this->categoria == 'R')
+            return "RPG";
+        elseif ($this->categoria == 'V')
+            return "Aventura";
+        elseif ($this->categoria == 'P')
+            return "Puzzle";
+        elseif ($this->categoria == 'F')
+            return "FPS";
+
+        return '';
+    }
+
+    public function setCategoria(?string $categoria) {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
     /**
      * Get the value of capaJogo
      */ 
@@ -107,5 +158,6 @@ class Jogo implements JsonSerializable {
         return $this;
     }
     
+
 
 }
