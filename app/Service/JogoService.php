@@ -18,6 +18,9 @@ class JogoService {
 
         if(! $jogo->getCategoria())
             return "O campo categoria é obrigatório.";
+
+        if(! $jogo->getPlataforma())
+            return "O campo plataforma é obrigatório.";
         
         if(! $jogo->getCapaJogo())
             return "O campo capa do jogo é obrigatório.";

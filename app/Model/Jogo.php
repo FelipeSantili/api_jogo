@@ -11,6 +11,7 @@ class Jogo implements JsonSerializable {
     private ?string $empresa;
     private ?int $anoLancamento;
     private ?string $categoria;
+    private ?string $plataforma;
     private ?string $capaJogo;
 
     public function __construct() {
@@ -19,6 +20,7 @@ class Jogo implements JsonSerializable {
         $this->empresa = null;
         $this->anoLancamento = 0;
         $this->categoria = null;
+        $this->plataforma = null;
         $this->capaJogo = null;
     }
 
@@ -29,6 +31,7 @@ class Jogo implements JsonSerializable {
             'empresa' => $this->empresa,
             'anoLancamento' => $this->anoLancamento,
             'categoria' => $this->getCategoriaName(),
+            'plataforma' => $this->getPlataformaName(),
             'capaJogo' => $this->capaJogo,
         ];
     }
@@ -134,6 +137,31 @@ class Jogo implements JsonSerializable {
 
     public function setCategoria(?string $categoria) {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function getPlataforma(): ?string {
+        return $this->plataforma;
+    }
+
+    public function getPlataformaName(): ?string {
+        if ($this->plataforma == 'P')
+            return "Playstation";
+        elseif ($this->plataforma == 'C')
+            return "PC";
+        elseif ($this->plataforma == 'X')
+            return "Xbox";
+        elseif ($this->plataforma == 'N')
+            return "Nintendo";
+        elseif ($this->plataforma == 'M')
+            return "Multiplataforma";
+
+        return '';
+    }
+
+    public function setPlataforma(?string $plataforma) {
+        $this->plataforma = $plataforma;
 
         return $this;
     }

@@ -33,6 +33,9 @@ class JogoMapper {
 
         if(isset($regDatabase['categoria']))
         $obj->setCategoria($regDatabase['categoria']);
+
+        if(isset($regDatabase['plataforma']))
+        $obj->setPlataforma($regDatabase['plataforma']);
         
         if(isset($regDatabase['capaJogo']))
             $obj->setCapaJogo($regDatabase['capaJogo']);
