@@ -25,7 +25,7 @@ class JogoController {
         $this->jogoService = new JogoService();
     }
 
-    public function listarJogo(Request $request, Response $response, array $args): Response {
+    public function listar(Request $request, Response $response, array $args): Response {
         
         $jogos = $this->jogoDAO->list();
 
@@ -38,7 +38,7 @@ class JogoController {
                 ->withHeader('Content-Type', 'application/json');
     }
 
-    public function buscarjogoPorId(Request $request, Response $response, array $args): Response {
+    public function buscarPorId(Request $request, Response $response, array $args): Response {
 
 		$jogo = $this->jogoDAO->findById($args["id"]);
 
@@ -55,7 +55,7 @@ class JogoController {
 		return $response->withStatus(404);
     }
 
-	public function inserirJogo(Request $request, Response $response, array $args): Response {
+	public function inserir(Request $request, Response $response, array $args): Response {
 
 		$jsonArrayAssoc = $request->getParsedBody();
 
@@ -79,7 +79,7 @@ class JogoController {
 		return $response->withStatus(201);
 	}
 
-    public function editarJogo(Request $request, Response $response, array $args): Response {
+    public function editar(Request $request, Response $response, array $args): Response {
 
         $id = $args['id'];
         $jsonData = $request->getParsedBody();
@@ -104,7 +104,7 @@ class JogoController {
         return $response->withStatus(200);
     }
 
-    public function deletarJogo(Request $request, Response $response, array $args): Response {
+    public function deletar(Request $request, Response $response, array $args): Response {
         $id = $args['id'];
 
         $jogo = $this->jogoDAO->findById($id);

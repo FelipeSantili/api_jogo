@@ -5,28 +5,29 @@ use Slim\Factory\AppFactory;
 
 use App\Controller\JogoController;
 
+
 require_once(__DIR__ . '/vendor/autoload.php');
 
-//--------Habilita o framework Slim--------
 $app = AppFactory::create();
-$app->setBasePath("/api_jogo"); //Adicionar o nome da pasta do projeto
+$app->setBasePath("/api_jogo");
+
+$app->addBodyParsingMiddleware();
+$app->addErrorMiddleware(true, true, true);
+
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("");
+    return $response;
+});
 
 
-//--------Opções do framework Slim--------
-$app->addBodyParsingMiddleware(); //Disponibliza o conteúdo recebido no corpo da requisição no objeto Request
-$app->addErrorMiddleware(true, true, true); //Retorna um erro do Framework caso não tratado
+$app->group('/jogos', function ($app) {
+    $app->get('', JogoController::class . ':listar');
+    $app->get('/{id}', JogoController::class . ':buscarPorId');
+    $app->post('', JogoController::class . ':inserir');
+    $app->put('/{id}', JogoController::class . ':editar');
+    $app->delete('/{id}', JogoController::class . ':deletar');
+});
 
 
-//--------Rotas disponiblizadas pela API--------
-
-//Rotas de jogos
-
-$app->get("/jogos", JogoController::class . ":listarJogo");
-$app->get("/jogos/{id}", JogoController::class . ":buscarJogoPorId");
-$app->post("/jogos", JogoController::class . ":inserirJogo");
-$app->put("/jogos/{id}", JogoController::class . ":atualizarJogo");
-$app->delete("/jogos/{id}", JogoController::class . ":deletarJogo");
-
-
-//--------Executa o framework slim--------
 $app->run();
+?>
