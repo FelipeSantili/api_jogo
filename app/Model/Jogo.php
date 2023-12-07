@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use \JsonSerializable;
+use JsonSerializable;
 
-class Jogo {
+class Jogo implements JsonSerializable {
 
     private ?int $id;
     private ?string $nome;
@@ -16,6 +16,15 @@ class Jogo {
         $this->nome = null;
         $this->empresa = null;
         $this->capaJogo = null;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'empresa' => $this->empresa,
+            'capaJogo' => $this->capaJogo,
+        ];
     }
 
     /**
@@ -97,5 +106,6 @@ class Jogo {
 
         return $this;
     }
+    
 
 }

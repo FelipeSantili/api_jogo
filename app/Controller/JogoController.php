@@ -29,7 +29,18 @@ class JogoController {
         
         $jogos = $this->jogoDAO->list();
 
-        $json = json_encode($jogos, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        $json = json_encode($jogos, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                echo 'Erro na serialização JSON: ' . json_last_error_msg();
+            } else {
+                // Se não houver erros, continua o processamento
+                $response->getBody()->write($json);
+                return $response
+                    ->withStatus(200)
+                    ->withHeader('Content-Type', 'application/json');
+            }
+
 
         $response->getBody()->write($json);
         
